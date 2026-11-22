@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tini's Mac & Cheese — Tom Thumb Fort Worth</title>
+  <title>Holiday Shopping List — Tom Thumb Fort Worth</title>
 
   <!-- Browser Tab & Mobile Home Screen Icons -->
   <link rel="icon" type="image/jpeg" href="https://doodbleboi.github.io/sarahdrive/logo.jpg">
@@ -11,15 +11,15 @@
   <link rel="apple-touch-icon" href="https://doodbleboi.github.io/sarahdrive/logo.jpg">
 
   <!-- Link Preview / Social / SMS Thumbnails -->
-  <meta name="description" content="Glanceable Tom Thumb Fort Worth shopping list and Cook Mode for Tini's Mac & Cheese.">
+  <meta name="description" content="Glanceable Tom Thumb Fort Worth holiday shopping list and Cook Mode for Mac and Cheese, Stuffing, Green Bean Bake, and Cranberry Sauce.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://doodbleboi.github.io/sarahdrive/">
-  <meta property="og:title" content="Tini's Mac & Cheese — Tom Thumb Fort Worth">
-  <meta property="og:description" content="Interactive Tom Thumb shopping list with exact brands/sizes + step-by-step Cook Mode.">
+  <meta property="og:title" content="Holiday Shopping List — Tom Thumb Fort Worth">
+  <meta property="og:description" content="Interactive Tom Thumb shopping checklist with brands, sizes, 1-page PDF download, and step-by-step Cook Mode.">
   <meta property="og:image" content="https://doodbleboi.github.io/sarahdrive/logo.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Tini's Mac & Cheese — Tom Thumb Fort Worth">
-  <meta name="twitter:description" content="Interactive Tom Thumb shopping list with exact brands/sizes + step-by-step Cook Mode.">
+  <meta name="twitter:title" content="Holiday Shopping List — Tom Thumb Fort Worth">
+  <meta name="twitter:description" content="Interactive Tom Thumb shopping checklist with brands, sizes, 1-page PDF download, and step-by-step Cook Mode.">
   <meta name="twitter:image" content="https://doodbleboi.github.io/sarahdrive/logo.jpg">
 
   <style>
@@ -30,9 +30,15 @@
       --muted: #5a626a;
       --border: #e3e6e8;
       --accent: #c8102e; /* Tom Thumb red */
+      --accent-dark: #a30c24;
       --accent-soft: #fdf0f2;
       --pantry: #8a5a00;
       --pantry-bg: #fff6e0;
+      --opt: #1e5b88;
+      --opt-bg: #eaf4fc;
+      --verify: #6b21a8;
+      --verify-bg: #f3e8ff;
+      --dish-bg: #eef1f4;
       --done: #9aa3ab;
     }
 
@@ -87,7 +93,7 @@
     }
 
     h1 {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       margin: 0;
       letter-spacing: -0.01em;
       white-space: nowrap;
@@ -137,8 +143,77 @@
       padding: 0.9rem 1rem;
     }
 
+    /* PDF Download Banner */
+    .pdf-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+      margin-bottom: 0.9rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .pdf-banner:hover { background: #fcfcfd; }
+
+    .pdf-text strong {
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .pdf-text span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .pdf-cta {
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.42rem 0.75rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .pdf-banner:hover .pdf-cta { background: var(--accent-dark); }
+
     .panel { display: none; }
     .panel.active { display: block; }
+
+    /* Dish Filter Pills */
+    .filters {
+      display: flex;
+      gap: 0.35rem;
+      overflow-x: auto;
+      padding-bottom: 0.35rem;
+      margin-bottom: 0.55rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-pill {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.32rem 0.65rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .filter-pill.active {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
 
     .status-bar {
       display: flex;
@@ -160,6 +235,8 @@
       cursor: pointer;
     }
 
+    .section-group.hidden { display: none; }
+
     .section-title {
       font-size: 0.78rem;
       font-weight: 800;
@@ -180,12 +257,13 @@
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
-      padding: 0.85rem 0.9rem;
+      padding: 0.82rem 0.9rem;
       border-bottom: 1px solid var(--border);
       cursor: pointer;
       user-select: none;
     }
 
+    .item.hidden { display: none; }
     .item:last-child { border-bottom: none; }
 
     .item input[type="checkbox"] {
@@ -203,13 +281,13 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
 
     .qty {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 800;
-      background: #eef1f4;
+      background: var(--dish-bg);
       color: var(--text);
       padding: 0.12rem 0.45rem;
       border-radius: 6px;
@@ -217,33 +295,70 @@
     }
 
     .name {
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: 700;
     }
 
     .tag-pantry {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       color: var(--pantry);
       background: var(--pantry-bg);
-      padding: 0.12rem 0.45rem;
+      padding: 0.12rem 0.42rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .tag-opt {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--opt);
+      background: var(--opt-bg);
+      padding: 0.12rem 0.42rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .tag-verify {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--verify);
+      background: var(--verify-bg);
+      padding: 0.12rem 0.42rem;
       border-radius: 6px;
       text-transform: uppercase;
     }
 
     .brands {
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       color: var(--muted);
-      margin-top: 0.25rem;
+      margin-top: 0.22rem;
     }
 
     .brands strong { color: var(--text); font-weight: 600; }
 
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.25rem;
+    }
+
+    .dish-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.08rem 0.4rem;
+      border-radius: 5px;
+    }
+
     .note {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--accent);
       font-weight: 600;
-      margin-top: 0.2rem;
     }
 
     .item.checked .name,
@@ -257,51 +372,42 @@
     }
 
     /* Cook Mode */
-    .quick-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+    .dish-block { margin-bottom: 1.4rem; }
+
+    .dish-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 0.25rem 0 0.5rem 0.1rem;
     }
 
-    .stat {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 0.65rem 0.5rem;
-      text-align: center;
-    }
-
-    .stat-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    .stat-val {
+    .dish-header h2 {
       font-size: 1rem;
-      font-weight: 800;
-      margin-top: 0.15rem;
+      margin: 0;
+    }
+
+    .dish-meta {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
     }
 
     .spice-box {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.85rem 1rem;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
+      border-radius: 10px;
+      padding: 0.7rem 0.9rem;
+      margin-bottom: 0.55rem;
+      font-size: 0.86rem;
     }
 
-    .spice-box strong { display: block; margin-bottom: 0.3rem; }
+    .spice-box strong { display: block; margin-bottom: 0.2rem; }
 
     .step {
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
-      padding: 0.9rem;
+      padding: 0.82rem 0.9rem;
       border-bottom: 1px solid var(--border);
       cursor: pointer;
     }
@@ -323,7 +429,7 @@
       margin-top: 0.05rem;
     }
 
-    .step-text { font-size: 0.95rem; }
+    .step-text { font-size: 0.92rem; }
     .step-text b { color: #000; }
 
     .step.checked .step-num { background: var(--done); }
@@ -348,7 +454,7 @@
     <div class="title-row">
       <div class="brand-left">
         <img src="./logo.jpg" alt="Logo" class="corner-logo">
-        <h1>Tini's Mac &amp; Cheese</h1>
+        <h1>Holiday Shopping List</h1>
       </div>
       <span class="store-badge">Tom Thumb • Fort Worth</span>
     </div>
@@ -360,248 +466,558 @@
 </header>
 
 <main>
+  <!-- 1-PAGE PDF CHEAT SHEET DOWNLOAD -->
+  <a class="pdf-banner" href="./StephanieWenkHolidayShoppingChecklist.pdf" target="_blank" rel="noopener noreferrer" download>
+    <div class="pdf-text">
+      <strong>1-Page Printable Cheat Sheet (PDF)</strong>
+      <span>Stephanie Wenk Holiday Shopping Checklist</span>
+    </div>
+    <span class="pdf-cta">Download PDF</span>
+  </a>
+
   <!-- SHOPPING LIST PANEL -->
   <section id="shop" class="panel active">
+    <div class="filters" id="dishFilters">
+      <button class="filter-pill active" data-filter="all">All Dishes</button>
+      <button class="filter-pill" data-filter="mac">Mac and Cheese</button>
+      <button class="filter-pill" data-filter="stuffing">Stuffing</button>
+      <button class="filter-pill" data-filter="beans">Green Beans</button>
+      <button class="filter-pill" data-filter="cranberry">Cranberry</button>
+    </div>
+
     <div class="status-bar">
-      <span id="counter">0 / 12 in cart</span>
+      <span id="counter">0 / 28 in cart</span>
       <button class="reset-btn" id="resetShop">Reset List</button>
     </div>
 
-    <div class="section-title">Dairy &amp; Refrigerated Cheese Wall</div>
-    <div class="card">
-      <label class="item" data-id="mozz">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 16 oz block</span>
-            <span class="name">Low-Moisture Mozzarella</span>
+    <!-- PRODUCE -->
+    <div class="section-group">
+      <div class="section-title">Produce Department</div>
+      <div class="card">
+        <label class="item" data-id="celery" data-dishes="stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 bunch</span>
+              <span class="name">Fresh Celery</span>
+            </div>
+            <div class="brands">Whole bunch / stalk (need 4 to 5 stalks diced)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+            </div>
           </div>
-          <div class="brands"><strong>Tillamook</strong> Whole Milk Mozzarella (16 oz) &middot; or <strong>Galbani</strong> (16 oz) &middot; or 2 × 8 oz <strong>Lucerne</strong> blocks</div>
-          <div class="note">Buy BLOCK only — do not buy pre-shredded bags</div>
-        </div>
-      </label>
+        </label>
 
-      <label class="item" data-id="colby">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 16 oz block</span>
-            <span class="name">Colby Jack Cheese</span>
+        <label class="item" data-id="onion" data-dishes="stuffing beans">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">2 medium</span>
+              <span class="name">Yellow Onions</span>
+            </div>
+            <div class="brands">Loose Yellow Onions (1 for Stuffing, 1 for Green Bean Bake)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+              <span class="dish-tag">Green Bean Bake</span>
+            </div>
           </div>
-          <div class="brands"><strong>Lucerne</strong> Natural Colby Jack (16 oz) &middot; or 2 × 8 oz <strong>Lucerne</strong> / <strong>Tillamook</strong> blocks</div>
-          <div class="note">Block only (for shredding)</div>
-        </div>
-      </label>
+        </label>
 
-      <label class="item" data-id="cheddar">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 8 oz block</span>
-            <span class="name">Sharp Cheddar Cheese</span>
+        <label class="item" data-id="cranberries" data-dishes="cranberry">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 12 oz bag</span>
+              <span class="name">Fresh Cranberries</span>
+            </div>
+            <div class="brands"><strong>Ocean Spray</strong> Fresh Cranberries (12 oz bag)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Cranberry Sauce</span>
+            </div>
           </div>
-          <div class="brands"><strong>Lucerne</strong> Sharp Cheddar Chunk (8 oz) &middot; or <strong>Tillamook</strong> Sharp Cheddar (8 oz)</div>
-          <div class="note">Block only (yellow sharp preferred)</div>
-        </div>
-      </label>
+        </label>
 
-      <label class="item" data-id="cream">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 16 fl oz (1 pint)</span>
-            <span class="name">Heavy Whipping Cream</span>
+        <label class="item" data-id="oranges" data-dishes="cranberry">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">2 whole</span>
+              <span class="name">Fresh Navel Oranges</span>
+            </div>
+            <div class="brands">Fresh Navel Oranges (for fresh juice and grated zest)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Cranberry Sauce</span>
+            </div>
           </div>
-          <div class="brands"><strong>Lucerne</strong> Heavy Whipping Cream (16 fl oz carton)</div>
-          <div class="note">1 pint = exact 2 cups needed</div>
-        </div>
-      </label>
+        </label>
 
-      <label class="item" data-id="butter">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 16 oz (4 sticks)</span>
-            <span class="name">Unsalted Butter</span>
-            <span class="tag-pantry">Check Fridge</span>
+        <label class="item" data-id="chives" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 small bunch</span>
+              <span class="name">Fresh Chives</span>
+              <span class="tag-opt">Optional</span>
+            </div>
+            <div class="brands"><strong>O Organics</strong> Fresh Chives (1 tbsp chopped for garnish)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+            </div>
           </div>
-          <div class="brands"><strong>Lucerne</strong> Sweet Cream Unsalted Butter (only need 3 tbsp + greasing dish)</div>
-        </div>
-      </label>
+        </label>
+      </div>
     </div>
 
-    <div class="section-title">Pasta &amp; Baking Aisles</div>
-    <div class="card">
-      <label class="item" data-id="pasta">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 16 oz box</span>
-            <span class="name">Cavatappi Pasta</span>
+    <!-- MEAT AND SEAFOOD -->
+    <div class="section-group">
+      <div class="section-title">Meat and Seafood Department</div>
+      <div class="card">
+        <label class="item" data-id="sausage" data-dishes="stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 16 oz roll</span>
+              <span class="name">Sage Pork Sausage</span>
+            </div>
+            <div class="brands"><strong>Jimmy Dean</strong> Premium Pork Sage Sausage (16 oz roll)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+            </div>
           </div>
-          <div class="brands"><strong>Signature SELECT</strong> Cavatappi (16 oz) &middot; or <strong>De Cecco</strong> Cavatappi (16 oz) &middot; or <strong>Barilla</strong> Cellentani</div>
-          <div class="note">Corkscrew / spiral tubes</div>
-        </div>
-      </label>
+        </label>
 
-      <label class="item" data-id="evap">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 12 fl oz can</span>
-            <span class="name">Evaporated Milk</span>
+        <label class="item" data-id="bacon" data-dishes="stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 16 oz pack</span>
+              <span class="name">Thick Cut Bacon</span>
+            </div>
+            <div class="brands"><strong>Wright Brand</strong> Hickory Smoked Thick Cut Bacon (16 oz)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+            </div>
           </div>
-          <div class="brands"><strong>Carnation</strong> Evaporated Milk (12 fl oz can) &middot; or <strong>Signature SELECT</strong> (12 fl oz)</div>
-          <div class="note">NOT sweetened condensed milk!</div>
-        </div>
-      </label>
-
-      <label class="item" data-id="flour">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 2 lb or 5 lb bag</span>
-            <span class="name">All-Purpose Flour</span>
-            <span class="tag-pantry">Check Pantry</span>
-          </div>
-          <div class="brands"><strong>Signature SELECT</strong> or <strong>Gold Medal</strong> All-Purpose Flour (only need 3 tbsp)</div>
-        </div>
-      </label>
+        </label>
+      </div>
     </div>
 
-    <div class="section-title">Condiments &amp; Spice Aisle</div>
-    <div class="card">
-      <label class="item" data-id="dijon">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 8 oz jar</span>
-            <span class="name">Dijon Mustard</span>
-            <span class="tag-pantry">Check Fridge</span>
+    <!-- DAIRY AND REFRIGERATED -->
+    <div class="section-group">
+      <div class="section-title">Dairy and Refrigerated Department</div>
+      <div class="card">
+        <label class="item" data-id="mozz" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">16 oz total (two 8 oz blocks)</span>
+              <span class="name">Low-Moisture Mozzarella</span>
+            </div>
+            <div class="brands"><strong>Lucerne</strong> Low-Moisture Mozzarella &middot; or <strong>Tillamook</strong> / <strong>Galbani</strong> (16 oz)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+              <span class="note">Block only — shred fresh</span>
+            </div>
           </div>
-          <div class="brands"><strong>Grey Poupon</strong> Classic Dijon (8 oz) &middot; or <strong>Signature SELECT</strong> Dijon (only need 1 tbsp)</div>
-        </div>
-      </label>
+        </label>
 
-      <label class="item" data-id="paprika">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 jar</span>
-            <span class="name">Smoked Paprika</span>
-            <span class="tag-pantry">Check Pantry</span>
+        <label class="item" data-id="colby" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">16 oz total (two 8 oz blocks)</span>
+              <span class="name">Colby Jack Cheese</span>
+            </div>
+            <div class="brands"><strong>Lucerne</strong> Natural Colby Jack &middot; or <strong>Tillamook</strong> (16 oz total)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+              <span class="note">Block only — shred fresh</span>
+            </div>
           </div>
-          <div class="brands"><strong>McCormick</strong> Smoked Paprika &middot; or <strong>Signature SELECT</strong> (need 1 tsp)</div>
-        </div>
-      </label>
+        </label>
 
-      <label class="item" data-id="garlic">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 jar</span>
-            <span class="name">Garlic Powder + Salt &amp; Pepper</span>
-            <span class="tag-pantry">Check Pantry</span>
+        <label class="item" data-id="cheddar" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 8 oz block</span>
+              <span class="name">Sharp Cheddar Cheese</span>
+            </div>
+            <div class="brands"><strong>Lucerne</strong> or <strong>Cabot</strong> Sharp Cheddar Chunk (8 oz block)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+              <span class="note">Block only — shred fresh</span>
+            </div>
           </div>
-          <div class="brands"><strong>McCormick</strong> / <strong>Signature SELECT</strong> Garlic Powder (1 tsp), Kosher Salt (1 tsp), Black Pepper (1 tsp)</div>
-        </div>
-      </label>
+        </label>
+
+        <label class="item" data-id="butter" data-dishes="mac stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 box (4 sticks / 1 lb)</span>
+              <span class="name">Unsalted Butter</span>
+              <span class="tag-pantry">Check Fridge</span>
+            </div>
+            <div class="brands"><strong>Lucerne</strong> or <strong>Challenge</strong> Unsalted Butter (3 tbsp for Mac, 4 tbsp for Stuffing)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+              <span class="dish-tag">Stuffing</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="cream" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 pint (16 fl oz)</span>
+              <span class="name">Heavy Whipping Cream</span>
+            </div>
+            <div class="brands"><strong>Lucerne</strong> Heavy Whipping Cream (16 fl oz carton)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+              <span class="note">1 pint = exact 2 cups needed</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="milk" data-dishes="beans">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 pint or quart</span>
+              <span class="name">Whole or 2% Milk</span>
+            </div>
+            <div class="brands"><strong>Lucerne</strong> Milk (need 1 cup for doubled Green Bean Bake)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Green Bean Bake</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="eggs" data-dishes="beans stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 carton (12 eggs)</span>
+              <span class="name">Large Grade A Eggs</span>
+              <span class="tag-pantry">Check Fridge</span>
+            </div>
+            <div class="brands"><strong>Lucerne</strong> Large Eggs (Green Bean Bake / optional Stuffing binder)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Green Bean Bake</span>
+              <span class="dish-tag">Stuffing</span>
+            </div>
+          </div>
+        </label>
+      </div>
     </div>
 
-    <div class="section-title">Produce (Optional Garnish)</div>
-    <div class="card">
-      <label class="item" data-id="chives">
-        <input type="checkbox">
-        <div class="item-body">
-          <div class="item-top">
-            <span class="qty">1 × 0.5 oz clam-shell</span>
-            <span class="name">Fresh Chives</span>
+    <!-- PANTRY, CANNED GOODS, AND SPICES -->
+    <div class="section-group">
+      <div class="section-title">Pantry, Canned Goods, and Spices</div>
+      <div class="card">
+        <label class="item" data-id="pasta" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 16 oz box</span>
+              <span class="name">Cavatappi Corkscrew Pasta</span>
+            </div>
+            <div class="brands"><strong>Barilla</strong> Cellentani (16 oz) &middot; <strong>Signature SELECT</strong> Cavatappi &middot; or <strong>De Cecco</strong></div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+            </div>
           </div>
-          <div class="brands"><strong>O Organics</strong> Fresh Chives (refrigerated herb case) — optional</div>
-        </div>
-      </label>
+        </label>
+
+        <label class="item" data-id="evap" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 12 oz can</span>
+              <span class="name">Evaporated Milk</span>
+            </div>
+            <div class="brands"><strong>Carnation</strong> Evaporated Milk (12 oz can) &middot; or <strong>Signature SELECT</strong></div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+              <span class="note">NOT sweetened condensed milk</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="flour" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 bag</span>
+              <span class="name">All-Purpose Flour</span>
+              <span class="tag-pantry">Check Pantry</span>
+            </div>
+            <div class="brands"><strong>Signature SELECT</strong> or <strong>Gold Medal</strong> All-Purpose Flour (need 3 tbsp for roux)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="dijon" data-dishes="mac">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 jar</span>
+              <span class="name">Dijon Mustard</span>
+              <span class="tag-pantry">Check Fridge</span>
+            </div>
+            <div class="brands"><strong>Grey Poupon</strong> Classic Dijon &middot; or <strong>Signature SELECT</strong> (need 1 tbsp)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="breadcubes" data-dishes="stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1–2 bags (14 oz each)</span>
+              <span class="name">Stuffing Bread Cubes</span>
+            </div>
+            <div class="brands"><strong>Pepperidge Farm</strong> Herb Seasoned Cubed Stuffing (consider 2 bags to balance 2 lbs meat)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="broth" data-dishes="stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 32 oz carton</span>
+              <span class="name">Low Sodium Chicken Broth</span>
+            </div>
+            <div class="brands"><strong>Swanson</strong> Low Sodium Chicken Broth (32 oz) &middot; or <strong>Signature SELECT</strong></div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="greenbeans" data-dishes="beans">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">4 × 14.5 oz cans</span>
+              <span class="name">French Style Green Beans</span>
+            </div>
+            <div class="brands"><strong>Del Monte</strong> French Style Green Beans (14.5 oz cans)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Green Bean Bake</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="soup" data-dishes="beans">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">2 × 10.5 oz cans</span>
+              <span class="name">Cream of Mushroom Soup</span>
+            </div>
+            <div class="brands"><strong>Campbell's</strong> Condensed Cream of Mushroom Soup (doubled to match 4 cans beans)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Green Bean Bake</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="friedonions" data-dishes="beans">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 6 oz canister</span>
+              <span class="name">Crispy Fried Onions</span>
+            </div>
+            <div class="brands"><strong>French's</strong> Original Crispy Fried Onions (6 oz)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Green Bean Bake</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="brownsugar" data-dishes="cranberry">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 16 oz bag</span>
+              <span class="name">Light Brown Sugar</span>
+              <span class="tag-pantry">Check Pantry</span>
+            </div>
+            <div class="brands"><strong>Domino</strong> or <strong>Signature SELECT</strong> Light Brown Sugar (need 1 cup)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Cranberry Sauce</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="cinnamon" data-dishes="cranberry">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 container (2+ sticks)</span>
+              <span class="name">Whole Cinnamon Sticks</span>
+            </div>
+            <div class="brands"><strong>Signature SELECT</strong> or <strong>McCormick</strong> Cinnamon Sticks</div>
+            <div class="meta-row">
+              <span class="dish-tag">Cranberry Sauce</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="macspices" data-dishes="mac beans">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">Pantry Spices</span>
+              <span class="name">Garlic Powder, Smoked Paprika, Kosher Salt, Black Pepper</span>
+              <span class="tag-pantry">Check Pantry</span>
+            </div>
+            <div class="brands"><strong>McCormick</strong> or <strong>Signature SELECT</strong> (essential for Mac and Cheese and Green Bean Bake)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Mac and Cheese</span>
+              <span class="dish-tag">Green Bean Bake</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="poultry" data-dishes="stuffing">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 jar</span>
+              <span class="name">Poultry Seasoning or Dried Thyme</span>
+              <span class="tag-opt">Optional</span>
+            </div>
+            <div class="brands"><strong>McCormick</strong> Poultry Seasoning or Thyme Leaves</div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="soysauce" data-dishes="stuffing beans">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 × 15 oz bottle</span>
+              <span class="name">Soy Sauce</span>
+              <span class="tag-verify">Verify Recipe</span>
+            </div>
+            <div class="brands"><strong>Kikkoman</strong> Soy Sauce (verify if needed for your Stuffing or Green Bean recipe)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Stuffing</span>
+              <span class="dish-tag">Green Bean Bake</span>
+            </div>
+          </div>
+        </label>
+
+        <label class="item" data-id="bayleaves" data-dishes="cranberry">
+          <input type="checkbox">
+          <div class="item-body">
+            <div class="item-top">
+              <span class="qty">1 container</span>
+              <span class="name">Whole Bay Leaves</span>
+              <span class="tag-verify">Verify Recipe</span>
+            </div>
+            <div class="brands"><strong>McCormick</strong> Whole Bay Leaves (verify if needed for Cranberry Sauce)</div>
+            <div class="meta-row">
+              <span class="dish-tag">Cranberry Sauce</span>
+            </div>
+          </div>
+        </label>
+      </div>
     </div>
   </section>
 
   <!-- COOK MODE PANEL -->
   <section id="cook" class="panel">
-    <div class="quick-stats">
-      <div class="stat">
-        <div class="stat-label">Oven</div>
-        <div class="stat-val">350°F</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Bake + Broil</div>
-        <div class="stat-val">25–30m + 2m</div>
-      </div>
-      <div class="stat">
-        <div class="stat-label">Dish Size</div>
-        <div class="stat-val">9 × 13 in</div>
-      </div>
-    </div>
-
-    <div class="spice-box">
-      <strong>Seasoning Blend (mix in small bowl, use in 2 halves):</strong>
-      1 tsp smoked paprika &bull; 1 tsp garlic powder &bull; 1 tsp kosher salt &bull; 1 tsp black pepper
-    </div>
-
     <div class="status-bar">
-      <span>Tap a step to check it off</span>
+      <span>Tap any step to check it off</span>
       <button class="reset-btn" id="resetCook">Reset Steps</button>
     </div>
 
-    <div class="card">
-      <div class="step" data-step="1">
-        <div class="step-num">1</div>
-        <div class="step-text"><b>Preheat oven to 350°F</b> and butter a 9×13 baking dish.</div>
+    <!-- DISH 1: TINI'S MAC AND CHEESE -->
+    <div class="dish-block">
+      <div class="dish-header">
+        <h2>Tini's Mac and Cheese</h2>
+        <span class="dish-meta">350°F • 25–30 min + 2m broil</span>
       </div>
-      <div class="step" data-step="2">
-        <div class="step-num">2</div>
-        <div class="step-text"><b>Shred all 2.5 lbs of cheese</b> (16 oz mozzarella, 16 oz Colby Jack, 8 oz sharp cheddar). Toss together and <b>split into 2 equal bowls</b> (one for sauce, one for layering).</div>
+      <div class="spice-box">
+        <strong>Verified Seasoning Blend (split in 2 halves):</strong>
+        1 tsp smoked paprika &bull; 3/4 tsp kosher salt &bull; 1/2 tsp garlic powder &bull; 1/2 tsp black pepper
       </div>
-      <div class="step" data-step="3">
-        <div class="step-num">3</div>
-        <div class="step-text"><b>Boil 1 lb cavatappi</b> in heavily salted water ("like the ocean") for <b>8 min</b> (or <b>7 min</b> if baking later). Drain well.</div>
+      <div class="card">
+        <div class="step" data-step="mac1"><div class="step-num">1</div><div class="step-text"><b>Preheat oven to 350°F</b> and butter a 9×13 baking dish.</div></div>
+        <div class="step" data-step="mac2"><div class="step-num">2</div><div class="step-text"><b>Shred all 2.5 lbs of block cheese</b> (16 oz mozzarella, 16 oz Colby Jack, 8 oz sharp cheddar). Toss and split into <b>2 equal bowls</b>.</div></div>
+        <div class="step" data-step="mac3"><div class="step-num">3</div><div class="step-text"><b>Boil 1 lb cavatappi</b> in heavily salted water for <b>8 min</b> (7 min if baking later). Drain well.</div></div>
+        <div class="step" data-step="mac4"><div class="step-num">4</div><div class="step-text"><b>Roux:</b> Melt <b>3 tbsp butter</b> over medium heat. Bloom <b>half the spices</b> 30 sec, whisk in <b>3 tbsp flour</b>, cook <b>2–3 min</b>.</div></div>
+        <div class="step" data-step="mac5"><div class="step-num">5</div><div class="step-text"><b>Sauce:</b> Stream in <b>1 can (12 oz) evaporated milk</b>, whisk 1 min. Whisk in <b>1 tbsp Dijon</b>, then <b>2 cups heavy cream</b> and <b>remaining spices</b>. Simmer <b>2 min</b>.</div></div>
+        <div class="step" data-step="mac6"><div class="step-num">6</div><div class="step-text">Turn heat to <b>LOW</b>. Melt in <b>Bowl #1 cheese</b> one handful at a time. Fold in cooked pasta.</div></div>
+        <div class="step" data-step="mac7"><div class="step-num">7</div><div class="step-text"><b>Layer in dish:</b> Half mac &rarr; half Bowl #2 cheese &rarr; rest of mac &rarr; top with remaining cheese. <b>Bake 25–30 min</b>, broil <b>2 min</b>. Garnish with chives.</div></div>
       </div>
-      <div class="step" data-step="4">
-        <div class="step-num">4</div>
-        <div class="step-text"><b>Make roux:</b> Melt <b>3 tbsp butter</b> over medium heat. Add <b>half the seasoning blend</b> and bloom 30 sec. Whisk in <b>3 tbsp flour</b> and cook <b>2–3 min</b> until bubbly/paste-like.</div>
+    </div>
+
+    <!-- DISH 2: SAVORY SAUSAGE AND BACON STUFFING -->
+    <div class="dish-block">
+      <div class="dish-header">
+        <h2>Savory Sausage and Bacon Stuffing</h2>
+        <span class="dish-meta">350°F • 35–40 min</span>
       </div>
-      <div class="step" data-step="5">
-        <div class="step-num">5</div>
-        <div class="step-text"><b>Build sauce:</b> Slowly stream in <b>1 can (12 oz) evaporated milk</b>, whisking 1 min until smooth. Whisk in <b>1 tbsp Dijon mustard</b>.</div>
+      <div class="card">
+        <div class="step" data-step="stf1"><div class="step-num">1</div><div class="step-text">Cook chopped <b>bacon</b> until crisp; remove to a bowl. Brown <b>16 oz sage sausage</b> in the same pan, breaking into crumbles.</div></div>
+        <div class="step" data-step="stf2"><div class="step-num">2</div><div class="step-text">Saute diced <b>celery</b> and <b>1 yellow onion</b> with <b>butter</b> until soft (6–8 min). Stir in optional soy sauce and poultry seasoning.</div></div>
+        <div class="step" data-step="stf3"><div class="step-num">3</div><div class="step-text">Combine sausage, bacon, veggies, and <b>herb bread cubes</b> in a large bowl. Pour in <b>chicken broth</b> (about 2.5–3 cups) until moistened but not soggy.</div></div>
+        <div class="step" data-step="stf4"><div class="step-num">4</div><div class="step-text">Transfer to greased 9×13 dish. <b>Bake covered 20 min at 350°F</b>, then <b>uncovered 15–20 min</b> until crisp on top.</div></div>
       </div>
-      <div class="step" data-step="6">
-        <div class="step-num">6</div>
-        <div class="step-text">Slowly pour in <b>2 cups (1 pint) heavy cream</b> and the <b>remaining seasoning blend</b>. Simmer &amp; whisk ~<b>2 min</b> until slightly thickened.</div>
+    </div>
+
+    <!-- DISH 3: FRENCH GREEN BEAN BAKE -->
+    <div class="dish-block">
+      <div class="dish-header">
+        <h2>French Green Bean Bake</h2>
+        <span class="dish-meta">350°F • 30–35 min</span>
       </div>
-      <div class="step" data-step="7">
-        <div class="step-num">7</div>
-        <div class="step-text"><b>Melt cheese:</b> Turn heat to <b>LOW</b>. Add <b>Bowl #1 of shredded cheese</b> a handful at a time, letting each handful melt fully before adding the next.</div>
+      <div class="card">
+        <div class="step" data-step="grn1"><div class="step-num">1</div><div class="step-text">Drain <b>4 cans French style green beans</b> thoroughly. Saute diced <b>yellow onion</b> if using.</div></div>
+        <div class="step" data-step="grn2"><div class="step-num">2</div><div class="step-text">Whisk <b>2 cans Cream of Mushroom soup</b>, <b>1 cup milk</b>, black pepper, and half the <b>crispy fried onions</b> (plus eggs if your recipe uses them). Fold in green beans.</div></div>
+        <div class="step" data-step="grn3"><div class="step-num">3</div><div class="step-text">Spread into a greased baking dish. <b>Bake 25 min at 350°F</b>, top with remaining crispy fried onions, and bake <b>5–10 min</b> more until golden.</div></div>
       </div>
-      <div class="step" data-step="8">
-        <div class="step-num">8</div>
-        <div class="step-text"><b>Fold in cooked cavatappi</b> until every noodle is coated.</div>
+    </div>
+
+    <!-- DISH 4: FRESH ORANGE-CINNAMON CRANBERRY SAUCE -->
+    <div class="dish-block">
+      <div class="dish-header">
+        <h2>Orange-Cinnamon Cranberry Sauce</h2>
+        <span class="dish-meta">Stovetop • 15 min</span>
       </div>
-      <div class="step" data-step="9">
-        <div class="step-num">9</div>
-        <div class="step-text"><b>Layer in dish:</b> Half of mac &amp; cheese &rarr; half of <b>Bowl #2 cheese</b> &rarr; rest of mac &amp; cheese &rarr; remaining cheese on top.</div>
-      </div>
-      <div class="step" data-step="10">
-        <div class="step-num">10</div>
-        <div class="step-text"><b>Bake 25–30 min at 350°F</b> until bubbly. <b>Broil 2 min</b> to brown top. Garnish with chopped chives.</div>
+      <div class="card">
+        <div class="step" data-step="crn1"><div class="step-num">1</div><div class="step-text">Zest and juice <b>2 navel oranges</b>. Add water to reach <b>1 cup total liquid</b>.</div></div>
+        <div class="step" data-step="crn2"><div class="step-num">2</div><div class="step-text">Combine liquid, <b>1 cup light brown sugar</b>, <b>1–2 cinnamon sticks</b>, and optional <b>bay leaves</b> in a saucepan. Bring to a boil to dissolve sugar.</div></div>
+        <div class="step" data-step="crn3"><div class="step-num">3</div><div class="step-text">Add <b>12 oz fresh cranberries</b> and orange zest. Simmer <b>10–12 min</b> until berries burst and sauce thickens. Remove cinnamon sticks and bay leaves before chilling.</div></div>
       </div>
     </div>
   </section>
 
   <footer>
-    Source: <a href="https://www.tiktok.com/@tinekeyounger/video/7432820403464146219" target="_blank" rel="noopener noreferrer">@tinekeyounger on TikTok</a>
+    Mac and Cheese Source: <a href="https://www.tiktok.com/@tinekeyounger/video/7432820403464146219" target="_blank" rel="noopener noreferrer">@tinekeyounger on TikTok</a>
   </footer>
 </main>
 
 <script>
-  const SHOP_KEY = 'tini_mac_shop_v1';
-  const COOK_KEY = 'tini_mac_cook_v1';
+  const SHOP_KEY = 'holiday_shop_v3';
+  const COOK_KEY = 'holiday_cook_v3';
 
   // Tab switching
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -613,10 +1029,33 @@
     });
   });
 
-  // Shopping list persistence
+  // Dish filter pills
   const items = document.querySelectorAll('.item');
+  const sectionGroups = document.querySelectorAll('.section-group');
   const counter = document.getElementById('counter');
 
+  document.querySelectorAll('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.dataset.filter;
+
+      items.forEach(item => {
+        const dishes = item.dataset.dishes.split(' ');
+        const show = filter === 'all' || dishes.includes(filter);
+        item.classList.toggle('hidden', !show);
+      });
+
+      sectionGroups.forEach(group => {
+        const visibleCount = group.querySelectorAll('.item:not(.hidden)').length;
+        group.classList.toggle('hidden', visibleCount === 0);
+      });
+
+      updateCounter();
+    });
+  });
+
+  // Shopping list persistence
   function loadShop() {
     const saved = JSON.parse(localStorage.getItem(SHOP_KEY) || '{}');
     items.forEach(item => {
@@ -638,8 +1077,9 @@
   }
 
   function updateCounter() {
-    const done = document.querySelectorAll('.item input:checked').length;
-    counter.textContent = `${done} / ${items.length} in cart`;
+    const visibleItems = document.querySelectorAll('.item:not(.hidden)');
+    const visibleChecked = document.querySelectorAll('.item:not(.hidden) input:checked').length;
+    counter.textContent = `${visibleChecked} / ${visibleItems.length} in cart`;
   }
 
   items.forEach(item => {
