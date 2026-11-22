@@ -4,6 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tini's Mac & Cheese — Tom Thumb Fort Worth</title>
+
+  <!-- Browser Tab & Mobile Home Screen Icons -->
+  <link rel="icon" type="image/jpeg" href="https://doodbleboi.github.io/sarahdrive/logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="https://doodbleboi.github.io/sarahdrive/logo.jpg">
+  <link rel="apple-touch-icon" href="https://doodbleboi.github.io/sarahdrive/logo.jpg">
+
+  <!-- Link Preview / Social / SMS Thumbnails -->
+  <meta name="description" content="Glanceable Tom Thumb Fort Worth shopping list and Cook Mode for Tini's Mac & Cheese.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://doodbleboi.github.io/sarahdrive/">
+  <meta property="og:title" content="Tini's Mac & Cheese — Tom Thumb Fort Worth">
+  <meta property="og:description" content="Interactive Tom Thumb shopping list with exact brands/sizes + step-by-step Cook Mode.">
+  <meta property="og:image" content="https://doodbleboi.github.io/sarahdrive/logo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tini's Mac & Cheese — Tom Thumb Fort Worth">
+  <meta name="twitter:description" content="Interactive Tom Thumb shopping list with exact brands/sizes + step-by-step Cook Mode.">
+  <meta name="twitter:image" content="https://doodbleboi.github.io/sarahdrive/logo.jpg">
+
   <style>
     :root {
       --bg: #f6f7f8;
@@ -33,7 +51,7 @@
     header {
       background: var(--card);
       border-bottom: 1px solid var(--border);
-      padding: 1rem 1rem 0.75rem;
+      padding: 0.85rem 1rem 0.75rem;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -47,24 +65,45 @@
     .title-row {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+    }
+
+    .corner-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      display: block;
     }
 
     h1 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       margin: 0;
       letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .store-badge {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--accent);
       background: var(--accent-soft);
-      padding: 0.2rem 0.55rem;
+      padding: 0.22rem 0.55rem;
       border-radius: 999px;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .tabs {
@@ -307,7 +346,10 @@
 <header>
   <div class="header-inner">
     <div class="title-row">
-      <h1>Tini's Mac &amp; Cheese</h1>
+      <div class="brand-left">
+        <img src="./logo.jpg" alt="Logo" class="corner-logo">
+        <h1>Tini's Mac &amp; Cheese</h1>
+      </div>
       <span class="store-badge">Tom Thumb • Fort Worth</span>
     </div>
     <div class="tabs">
