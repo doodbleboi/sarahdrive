@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tini's Mac and Cheese (2024 Recipe)</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #222;
+    }
+    h1, h2 {
+      color: #111;
+    }
+    ul, ol {
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    .source {
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <article>
+    <header>
+      <h1>Tini's Mac and Cheese</h1>
+      <p class="source">
+        Recipe transcribed from <a href="https://www.tiktok.com/@tinekeyounger/video/7432820403464146219" target="_blank" rel="noopener noreferrer">@tinekeyounger on TikTok</a>
+      </p>
+    </header>
+
+    <section>
+      <h2>Ingredients</h2>
+      <ul>
+        <li>1 lb cavatappi pasta</li>
+        <li>3 tbsp butter</li>
+        <li>3 tbsp flour</li>
+        <li>1 can (12 oz) evaporated milk</li>
+        <li>2 cups heavy cream</li>
+        <li>1 tbsp Dijon mustard (optional)</li>
+        <li>Shredded cheese blend (split into two bowls)</li>
+        <li>Chives, for garnish (optional)</li>
+      </ul>
+
+      <h3>Seasoning Blend</h3>
+      <ul>
+        <li>Salt (start with ~1 tsp, adjust to taste)</li>
+        <li>Pepper (start with ~1 tsp, adjust to taste)</li>
+        <li>Smoked paprika (start with ~1 tsp, adjust to taste)</li>
+        <li>1 tbsp garlic powder</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Instructions</h2>
+      <ol>
+        <li>Preheat your oven to 350°F.</li>
+        <li>Bring a pot of water to a boil and salt it heavily ("like the ocean"). Boil the cavatappi pasta for 8 minutes if baking immediately, or 7 minutes if preparing ahead of time.</li>
+        <li>Shred all of the cheese, mix it together, and split it into two bowls.</li>
+        <li>Mix the salt, pepper, smoked paprika, and garlic powder together in a small container.</li>
+        <li>Melt 3 tablespoons of butter in a pan over medium heat. Add half of the seasoning blend and let it bloom for 30 seconds.</li>
+        <li>Add the flour and cook for 2–3 minutes.</li>
+        <li>Gradually pour in the evaporated milk and let it cook for about a minute. Stir in the Dijon mustard (if using).</li>
+        <li>Gradually pour in the heavy cream, mixing as you go, and let it cook for about 2 minutes.</li>
+        <li>Gradually add half of the shredded cheese, making sure each batch is completely melted before adding more. Stir in the remaining half of the seasoning blend.</li>
+        <li>Once all the cheese is melted, fold the cooked pasta into the cheese sauce.</li>
+        <li>In a baking dish, add half of the mac and cheese, top with a layer of shredded cheese, add the remaining mac and cheese, and finish with the rest of the shredded cheese on top.</li>
+        <li>Bake at 350°F for 25–30 minutes until the cheese on top is melted.</li>
+        <li><em>Optional:</em> Switch the oven to broil for 2 minutes to brown the top, then garnish with chives before serving.</li>
+      </ol>
+    </section>
+  </article>
+</body>
+</html>
